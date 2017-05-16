@@ -1,6 +1,6 @@
 # Conecta Docker Runner
 
-Stupid shell script to runner conecta in a docker container.
+Stupid shell script to run conecta in a docker container.
 
 ### How to:
 
