@@ -5,8 +5,11 @@ Stupid shell script to runner conecta in a docker container.
 ### How to:
 
 1 - Be sure you have Docker installed (this is important);
+
 2 - Be sure you have the project cloned on your local machine;
+
 3 - Go to the project's folder on your local machine;
+
 4 - `curl https://raw.githubusercontent.com/aceleradora-TW/conecta-docker-runner/master/run.sh | bash`
 
 If everything went well, __Conecta__ is supposed to be running on port `9000`.
