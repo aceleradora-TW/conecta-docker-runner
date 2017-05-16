@@ -1,4 +1,5 @@
-rm -f ./_conecta_image.docker
+docker stop conecta-docker-runner
+docker rm conecta-docker-runner
 
 printf "FROM ruby:2.3.1\n\
 RUN mkdir -p /usr/app\n\
@@ -9,14 +10,15 @@ COPY Gemfile /usr/app\n\
 COPY Gemfile.lock /usr/app\n\
 RUN bundle install" > ./_conecta_image.docker
 
-docker build -f ./_conecta_image.docker -t dockerized-conecta:latest . && 
+docker build -f ./_conecta_image.docker -t dockerized-conecta:latest . || rm -f ./_conecta_image.docker
 
-rm ./_conecta_image.docker &&
+rm -f ./_conecta_image.docker
 
 docker run \
 	-d \
 	--volume $(pwd)/app:/usr/app/app \
 	--volume $(pwd)/config:/usr/app/config \
+	--volume $(pwd)/public:/usr/app/public \
 	--volume $(pwd)/config.ru:/usr/app/config.ru \
 	--volume $(pwd)/config.rb:/usr/app/config.rb \
 	--name 'conecta-docker-runner' \
