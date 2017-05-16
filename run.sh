@@ -1,3 +1,5 @@
+TEMP_DOCKER_FILE=./_conecta_image.docker
+
 docker stop conecta-docker-runner
 docker rm conecta-docker-runner
 
@@ -8,11 +10,11 @@ RUN apt-get -qq update\n\
 RUN apt-get -qq -y install libpq-dev postgresql-server-dev-9.4\n\
 COPY Gemfile /usr/app\n\
 COPY Gemfile.lock /usr/app\n\
-RUN bundle install" > ./_conecta_image.docker
+RUN bundle install" > $TEMP_DOCKER_FILE
 
-docker build -f ./_conecta_image.docker -t dockerized-conecta:latest . || rm -f ./_conecta_image.docker
+docker build -f $TEMP_DOCKER_FILE -t dockerized-conecta:latest . || rm -f $TEMP_DOCKER_FILE
 
-rm -f ./_conecta_image.docker
+rm -f $TEMP_DOCKER_FILE
 
 docker run \
 	-d \
